@@ -1,0 +1,853 @@
+[
+  {
+    "category": "Carne",
+    "description": "Pratos à base de carne bovina preparados no estilo oriental",
+    "order": 1,
+    "items": [
+      {
+        "code": "38",
+        "name": "Carnes c/ Legumes Especial",
+        "description": "Carne bovina, frango, acelga, couve flor, cebola, brócolis, repolho, cenoura e ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 50.0
+          },
+          {
+            "name": "Média",
+            "price": 38.0
+          }
+        ]
+      },
+      {
+        "code": "39",
+        "name": "Carne com Brócolis",
+        "description": "Carne bovina, brócolis, finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 53.0
+          },
+          {
+            "name": "Média",
+            "price": 38.0
+          }
+        ]
+      },
+      {
+        "code": "40",
+        "name": "Carne com Brócolis Especial",
+        "description": "Carne bovina, brócolis, pimentão vermelho, champignon, finalizado com molho shoyu e molho de ostra.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 58.0
+          }
+        ]
+      },
+      {
+        "code": "42",
+        "name": "Carne com Legumes",
+        "description": "Carne bovina, acelga, couve flor, cebola, brócolis, cenoura, repolho, ovo de codorna, finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 58.0
+          },
+          {
+            "name": "Média",
+            "price": 40.0
+          }
+        ]
+      },
+      {
+        "code": "43",
+        "name": "Carne com Cebola",
+        "description": "Carne bovina e cebola, finalizado com molho à base de shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 50.0
+          }
+        ]
+      },
+      {
+        "code": "94",
+        "name": "Carne ao Molho Curry",
+        "description": "Carne bovina, cenoura, cebola, couve-flor e repolho. Finalizado com molho curry (Picante).",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 50.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Frutos do Mar",
+    "description": "Pratos à base de peixes e camarões frescos",
+    "order": 2,
+    "items": [
+      {
+        "code": "48",
+        "name": "Filé de Peixe ao Molho de Gengibre",
+        "description": "Filé de pescada frita e empanada, finalizado com molho shoyu, gengibre e cebolinha.",
+        "variations": [
+          {
+            "name": "Padrão",
+            "price": 60.0
+          }
+        ]
+      },
+      {
+        "code": "50",
+        "name": "Filé de Peixe com Legumes",
+        "description": "Filé de pescada frita e empanada, brócolis, couve flor, cebola, pimentão, acelga, finalizado com molho shoyu e saquê.",
+        "variations": [
+          {
+            "name": "Padrão",
+            "price": 70.0
+          }
+        ]
+      },
+      {
+        "code": "53",
+        "name": "Filé de Peixe ao Molho Apimentado",
+        "description": "Filé de pescada frita e empanada, gengibre, pimentão vermelho e cebolinha ao molho apimentado.",
+        "variations": [
+          {
+            "name": "Padrão",
+            "price": 70.0
+          }
+        ]
+      },
+      {
+        "code": "54",
+        "name": "Camarão ao Molho Apimentado",
+        "description": "Camarão, gengibre, pimentão, cebolinha, finalizado com molho de massa de tomate, pimenta e saquê.",
+        "variations": [
+          {
+            "name": "Padrão",
+            "price": 95.0
+          }
+        ]
+      },
+      {
+        "code": "65",
+        "name": "Camarão com Legumes",
+        "description": "Camarão, brócolis, couve flor, pimentão, cebola, acelga, kani-kama, finalizado com molho shoyu e saquê.",
+        "variations": [
+          {
+            "name": "Padrão",
+            "price": 150.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Bebidas",
+    "description": "Refrigerantes, cervejas, sucos e água",
+    "order": 3,
+    "items": [
+      {
+        "code": null,
+        "name": "Coca-Cola 2L",
+        "description": "Refrigerante Coca-Cola garrafa 2 Litros.",
+        "variations": [
+          {
+            "name": "2L",
+            "price": 20.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Refrigerante Sabores 2L",
+        "description": "Guaraná Antarctica, Fanta Laranja, Fanta Uva e Sprite.",
+        "variations": [
+          {
+            "name": "2L",
+            "price": 18.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Refrigerante 1L",
+        "description": "Coca-Cola Original ou Guaraná Antarctica garrafa de 1 Litro.",
+        "variations": [
+          {
+            "name": "1L",
+            "price": 15.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Refrigerante 600ml",
+        "description": "Coca-Cola ou Sprite garrafa de 600ml.",
+        "variations": [
+          {
+            "name": "600ml",
+            "price": 12.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Refrigerante Lata 350ml",
+        "description": "Coca-Cola, Guaraná Antarctica, Fanta Laranja, Fanta Uva e Sprite.",
+        "variations": [
+          {
+            "name": "Lata 350ml",
+            "price": 9.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "H2OH! 500ml",
+        "description": "H2OH nos sabores Limão ou Limoneto.",
+        "variations": [
+          {
+            "name": "500ml",
+            "price": 9.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Suco Lata Del Valle",
+        "description": "Pêssego, Uva, Goiaba, Manga e Maracujá.",
+        "variations": [
+          {
+            "name": "Lata 290ml",
+            "price": 8.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Cerveja Garrafa 600ml",
+        "description": "Original ou Heineken 600ml.",
+        "variations": [
+          {
+            "name": "600ml",
+            "price": 18.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Cerveja Lata 350ml",
+        "description": "Original ou Heineken Lata 350ml.",
+        "variations": [
+          {
+            "name": "Lata 350ml",
+            "price": 8.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Água com Gás 500ml",
+        "description": "Água mineral com gás 500ml.",
+        "variations": [
+          {
+            "name": "500ml",
+            "price": 7.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Água Mineral 500ml",
+        "description": "Água mineral sem gás 500ml.",
+        "variations": [
+          {
+            "name": "500ml",
+            "price": 5.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Adicionais",
+    "description": "Molhos e complementos adicionais",
+    "order": 4,
+    "items": [
+      {
+        "code": null,
+        "name": "Molho Agridoce",
+        "description": "Porção de molho agridoce adicional.",
+        "variations": [
+          {
+            "name": "Porção",
+            "price": 5.0
+          }
+        ]
+      },
+      {
+        "code": null,
+        "name": "Molho Gengibre",
+        "description": "Porção de molho de gengibre adicional.",
+        "variations": [
+          {
+            "name": "Porção",
+            "price": 5.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Entradas e Porções",
+    "description": "Aperitivos, porções e entradas orientais",
+    "order": 5,
+    "items": [
+      {
+        "code": "10",
+        "name": "Guioza Suíno",
+        "description": "Recheio: lombo suíno, acelga e gengibre. Acompanha molho à base de shoyu, gengibre e cebolinha.",
+        "variations": [
+          {
+            "name": "Inteira (12 unidades)",
+            "price": 40.0
+          },
+          {
+            "name": "1/2 Porção (6 unidades)",
+            "price": 30.0
+          }
+        ]
+      },
+      {
+        "code": "11",
+        "name": "Mandiopã",
+        "description": "Petisco frito feito de fécula de mandioca.",
+        "variations": [
+          {
+            "name": "Inteira",
+            "price": 25.0
+          },
+          {
+            "name": "1/2 Porção",
+            "price": 18.0
+          }
+        ]
+      },
+      {
+        "code": "OV",
+        "name": "Ovo de Codorna Porção",
+        "description": "Ovo de codorna cozido e frito, finalizado com molho à base de shoyu.",
+        "variations": [
+          {
+            "name": "Inteira (18 unidades)",
+            "price": 24.0
+          }
+        ]
+      },
+      {
+        "code": "BA",
+        "name": "Batata Frita",
+        "description": "Batata Palito (McCain).",
+        "variations": [
+          {
+            "name": "Inteira (500g in Natura)",
+            "price": 32.0
+          },
+          {
+            "name": "1/2 Porção (250g in Natura)",
+            "price": 23.0
+          }
+        ]
+      },
+      {
+        "code": "BO",
+        "name": "Bolinho de Bacalhau",
+        "description": "Massa com base de batata e peixe bacalhau.",
+        "variations": [
+          {
+            "name": "Inteira (12 unidades)",
+            "price": 40.0
+          },
+          {
+            "name": "1/2 Porção (8 unidades)",
+            "price": 30.0
+          }
+        ]
+      },
+      {
+        "code": "17",
+        "name": "Frango Frito (Porção)",
+        "description": "Filé de coxa desossada, sem pele, temperada e empanada.",
+        "variations": [
+          {
+            "name": "Inteira",
+            "price": 53.0
+          },
+          {
+            "name": "1/2 Porção",
+            "price": 37.0
+          }
+        ]
+      },
+      {
+        "code": "34",
+        "name": "Lombinho Agridoce (Porção)",
+        "description": "Carne suína temperada, empanada e finalizada com molho vermelho agridoce.",
+        "variations": [
+          {
+            "name": "Inteira",
+            "price": 55.0
+          },
+          {
+            "name": "1/2 Porção",
+            "price": 38.0
+          }
+        ]
+      },
+      {
+        "code": "35",
+        "name": "Lombinho Frito (Porção)",
+        "description": "Carne suína temperada e empanada.",
+        "variations": [
+          {
+            "name": "Inteira",
+            "price": 53.0
+          },
+          {
+            "name": "1/2 Porção",
+            "price": 37.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Yakisoba",
+    "description": "Tradicionais yakisobas preparados com legumes e carnes selecionadas",
+    "order": 6,
+    "items": [
+      {
+        "code": "99",
+        "name": "Yakisoba Clássico",
+        "description": "Macarrão, frango, carne bovina, brócolis, cenoura, couve-flor, acelga, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 50.0
+          },
+          {
+            "name": "Média",
+            "price": 37.0
+          }
+        ]
+      },
+      {
+        "code": "97",
+        "name": "Yakisoba Especial",
+        "description": "Macarrão, camarão, frango, carne bovina, brócolis, cenoura, couve-flor, acelga, ovo de codorna, champignon. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 70.0
+          },
+          {
+            "name": "Média",
+            "price": 47.0
+          }
+        ]
+      },
+      {
+        "code": "99C",
+        "name": "Yakisoba Carne",
+        "description": "Macarrão, carne bovina, brócolis, cenoura, couve-flor, acelga, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 53.0
+          },
+          {
+            "name": "Média",
+            "price": 37.0
+          }
+        ]
+      },
+      {
+        "code": "99F",
+        "name": "Yakisoba Frango",
+        "description": "Macarrão, frango, brócolis, cenoura, couve-flor, acelga, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 45.0
+          },
+          {
+            "name": "Média",
+            "price": 35.0
+          }
+        ]
+      },
+      {
+        "code": "98",
+        "name": "Yakisoba Camarão",
+        "description": "Macarrão, camarão, brócolis, cenoura, couve-flor, acelga, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 65.0
+          },
+          {
+            "name": "Média",
+            "price": 45.0
+          }
+        ]
+      },
+      {
+        "code": "96",
+        "name": "Yakisoba Vegetariano",
+        "description": "Macarrão, brócolis, cenoura, couve-flor, acelga, ovo de codorna, champignon. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 45.0
+          },
+          {
+            "name": "Média",
+            "price": 32.0
+          }
+        ]
+      },
+      {
+        "code": "95",
+        "name": "Yakisoba Sem Legumes",
+        "description": "Macarrão, frango, carne bovina, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 45.0
+          },
+          {
+            "name": "Média",
+            "price": 32.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Frango",
+    "description": "Pratos principais à base de frango",
+    "order": 7,
+    "items": [
+      {
+        "code": "12",
+        "name": "Frango ao Molho de Gengibre e Brócolis",
+        "description": "Filé de coxa desossada, sem pele e empanada com brócolis. Finalizado com molho à base de shoyu, limão, gengibre e cebolinha.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 65.0
+          },
+          {
+            "name": "Média",
+            "price": 45.0
+          }
+        ]
+      },
+      {
+        "code": "15",
+        "name": "Frango c/ Gengibre",
+        "description": "Filé de coxa desossada, sem pele e empanada. Finalizado com molho base de shoyu, gengibre e cebolinha.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 58.0
+          },
+          {
+            "name": "Média",
+            "price": 42.0
+          }
+        ]
+      },
+      {
+        "code": "16",
+        "name": "Filé de Frango c/ Brócolis e Champignon",
+        "description": "Filé de peito de frango, brócolis, champignons e pimentão vermelho. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 53.0
+          }
+        ]
+      },
+      {
+        "code": "17",
+        "name": "Frango Frito (Prato Principal)",
+        "description": "Filé de coxa desossada, sem pele, temperada e empanada.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 53.0
+          },
+          {
+            "name": "Média",
+            "price": 37.0
+          }
+        ]
+      },
+      {
+        "code": "20",
+        "name": "Frango com Legumes",
+        "description": "Cubos de peito de frango, acelga, cenoura, couve flor, cebola, repolho, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 48.0
+          },
+          {
+            "name": "Média",
+            "price": 35.0
+          }
+        ]
+      },
+      {
+        "code": "22",
+        "name": "Frango ao Molho Curry",
+        "description": "Cubos de peito de frango, cenoura, couve-flor, cebola, repolho. Finalizado com molho curry picante.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 45.0
+          }
+        ]
+      },
+      {
+        "code": "23",
+        "name": "Frango Xadrez",
+        "description": "Cubos de peito de frango, salsão, pimentão, cebola, ovo de codorna, amendoim. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 53.0
+          },
+          {
+            "name": "Média",
+            "price": 37.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Lombo",
+    "description": "Pratos principais à base de carne suína / lombo",
+    "order": 8,
+    "items": [
+      {
+        "code": "26",
+        "name": "Lombinho ao Molho Missô",
+        "description": "Carne suína fatiada, pimentão vermelho, repolho, finalizado com molho missô (agridoce).",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 47.0
+          },
+          {
+            "name": "Médio",
+            "price": 35.0
+          }
+        ]
+      },
+      {
+        "code": "27",
+        "name": "Lombinho Picante",
+        "description": "Carne suína, salsão, pimentão. Finalizado com molho shoyu (levemente apimentado).",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 46.0
+          }
+        ]
+      },
+      {
+        "code": "31",
+        "name": "Lombo Xadrez",
+        "description": "Carne suína, salsão, cebola e pimentões, finalizado com molho shoyu (levemente apimentado).",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 50.0
+          },
+          {
+            "name": "Médio",
+            "price": 37.0
+          }
+        ]
+      },
+      {
+        "code": "32",
+        "name": "Lombo e Frango Xadrez ao Molho Missô",
+        "description": "Carne suína, frango, salsão, cebola, pimentão, finalizado com molho missô (agridoce).",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 50.0
+          }
+        ]
+      },
+      {
+        "code": "34",
+        "name": "Lombinho Agridoce (Prato Principal)",
+        "description": "Carne suína temperada, empanada e finalizada com molho vermelho agridoce.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 55.0
+          },
+          {
+            "name": "Médio",
+            "price": 38.0
+          }
+        ]
+      },
+      {
+        "code": "35",
+        "name": "Lombinho Frito (Prato Principal)",
+        "description": "Carne suína temperada e empanada.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 53.0
+          },
+          {
+            "name": "Médio",
+            "price": 37.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Arroz",
+    "description": "Porções de Yakimeshi e Gohan",
+    "order": 9,
+    "items": [
+      {
+        "code": "93",
+        "name": "Yakimeshi Vegetariano",
+        "description": "Arroz branco japonês temperado com cenoura em cubos, ovo e cebolinha.",
+        "variations": [
+          {
+            "name": "Média",
+            "price": 36.0
+          },
+          {
+            "name": "Pequena",
+            "price": 26.0
+          }
+        ]
+      },
+      {
+        "code": "89",
+        "name": "Yakimeshi Camarão",
+        "description": "Arroz branco japonês temperado com camarão, cenoura em cubos, ovo e cebolinha.",
+        "variations": [
+          {
+            "name": "Média",
+            "price": 46.0
+          },
+          {
+            "name": "Pequena",
+            "price": 37.0
+          }
+        ]
+      },
+      {
+        "code": "88",
+        "name": "Yakimeshi Frango",
+        "description": "Arroz branco japonês temperado com lascas de frango, cenoura em cubos, ovo e cebolinha.",
+        "variations": [
+          {
+            "name": "Média",
+            "price": 38.0
+          },
+          {
+            "name": "Pequena",
+            "price": 30.0
+          }
+        ]
+      },
+      {
+        "code": "87",
+        "name": "Yakimeshi Carne",
+        "description": "Arroz branco japonês temperado com carne bovina moída, cenoura em cubos, ovo e cebolinha.",
+        "variations": [
+          {
+            "name": "Média",
+            "price": 40.0
+          },
+          {
+            "name": "Pequena",
+            "price": 30.0
+          }
+        ]
+      },
+      {
+        "code": "86",
+        "name": "Gohan",
+        "description": "Arroz branco japonês.",
+        "variations": [
+          {
+            "name": "Chawan",
+            "price": 13.0
+          },
+          {
+            "name": "Média",
+            "price": 35.0
+          },
+          {
+            "name": "Pequena",
+            "price": 25.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Vegetariano",
+    "description": "Opções vegetarianas",
+    "order": 10,
+    "items": [
+      {
+        "code": "06",
+        "name": "Harumaki Vegetariano",
+        "description": "Recheio repolho, cenoura, cebolinha. Acompanha molho vermelho agridoce.",
+        "variations": [
+          {
+            "name": "5 Unidades",
+            "price": 45.0
+          },
+          {
+            "name": "3 Unidades",
+            "price": 32.0
+          }
+        ]
+      },
+      {
+        "code": "36",
+        "name": "Mix de Legumes",
+        "description": "Acelga, couve-flor, brócolis, cenoura, repolho, champignon, ovo de codorna. Finalizado com molho shoyu.",
+        "variations": [
+          {
+            "name": "Grande",
+            "price": 47.0
+          }
+        ]
+      }
+    ]
+  }
+]

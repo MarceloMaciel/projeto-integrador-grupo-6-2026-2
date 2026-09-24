@@ -12,12 +12,7 @@ class DatabaseSeeder extends Seeder
     use WithoutModelEvents;
 
     /**
-     * Cria o usuário de acesso ao sistema.
-     *
-     * O sistema não tem tela de cadastro público: o acesso é criado por aqui.
-     * As credenciais abaixo são apenas para uso local. ANTES DE PUBLICAR O
-     * SISTEMA NA NUVEM, defina OWNER_EMAIL e OWNER_PASSWORD nas variáveis de
-     * ambiente do servidor para não subir com a senha padrão.
+     * Cria o usuário de acesso ao sistema e popula o cardápio.
      */
     public function run(): void
     {
@@ -29,5 +24,7 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        $this->call(MenuSeeder::class);
     }
 }
