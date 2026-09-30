@@ -29,12 +29,171 @@ Ainda **não** implementado: cadastro de produtos, lançamento de pedidos e gera
 | Interatividade | JavaScript |
 | Build de assets | Vite (Node.js) |
 | Banco de dados | SQLite (local, nesta etapa) |
+| Ambiente de desenvolvimento | Docker + Docker Compose (Nginx + PHP-FPM + Node) |
 
 ---
 
-## 1. Instalar os pré-requisitos
+## 1. Instalar o pré-requisito
+
+O jeito oficial de rodar o projeto localmente é via **Docker** — é só isso que precisa estar instalado.
+
+### Linux
+
+Instale o Docker Engine + o plugin do Compose (o script oficial detecta a distro e faz tudo):
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+```
+
+Depois **saia e entre de novo na sessão** (ou rode `newgrp docker`) para usar `docker` sem `sudo`.
+
+### macOS e Windows
+
+Instale o **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**. No Windows, use o backend **WSL2** (o próprio instalador já sugere isso).
+
+### Em qualquer sistema, confira se está tudo no lugar
+
+```bash
+docker --version
+docker compose version
+```
+
+> Prefere não usar Docker? Existe um caminho alternativo (PHP/Composer/Node instalados na máquina) na seção [Alternativa sem Docker](#alternativa-sem-docker), mas o suportado e testado pelo grupo é o Docker.
+
+## 2. Clonar e subir o projeto
+
+```bash
+git clone https://github.com/MarceloMaciel/projeto-integrador-grupo-6-2026-2.git
+cd projeto-integrador-grupo-6-2026-2
+docker compose up -d
+```
+
+Na primeira vez isso builda as imagens, instala as dependências do PHP e do Node, e o
+container `app` roda automaticamente (via `docker/entrypoint.sh`): cria o `.env` a partir
+do `.env.example`, gera a chave da aplicação, cria o banco SQLite, aplica as migrations e
+cria o usuário de acesso ao sistema (seeder — só na primeira vez). Acompanhe pelo log:
+
+```bash
+docker compose logs -f app
+```
+
+Espere aparecer `Setup complete. Starting php-fpm...` antes de acessar a aplicação.
+
+---
+
+## 3. Acessar a aplicação
+
+Acesse **<http://localhost:8000>**.
+
+Entre com as credenciais criadas pelo seeder:
+
+| Campo | Valor |
+| --- | --- |
+| E-mail | `proprietaria@restaurante.test` |
+| Senha | `senha1234` |
+
+São credenciais **apenas para uso local**, definidas no `.env` (`OWNER_EMAIL` e
+`OWNER_PASSWORD`). Se quiser outras, altere o `.env` e rode
+`docker compose exec app php artisan db:seed`.
+
+### Editando CSS ou JavaScript
+
+Não precisa rodar nada à parte: o `docker compose up` já sobe um container `node` com o
+Vite em modo de desenvolvimento (<http://localhost:5173>), recompilando automaticamente a
+cada arquivo salvo.
+
+---
+
+## Comandos úteis (Docker)
+
+| Comando | O que faz |
+| --- | --- |
+| `docker compose up -d` | Sobe (ou religa) os containers em segundo plano |
+| `docker compose down` | Para e remove os containers (o código e o banco continuam no disco) |
+| `docker compose logs -f app` | Acompanha o log do container da aplicação |
+| `docker compose exec app php artisan migrate` | Aplica as migrations pendentes no banco |
+| `docker compose exec app php artisan db:seed` | Recria o usuário de acesso ao sistema |
+| `docker compose exec app php artisan test` | Roda os testes automatizados |
+| `docker compose exec app php artisan route:list` | Lista todas as rotas da aplicação |
+| `docker compose exec app php artisan [comando]` | Roda qualquer comando Artisan dentro do container |
+| `docker compose build` | Reconstrói a imagem (depois de mudar o `Dockerfile` ou `composer.json`) |
+
+---
+
+## Problemas comuns
+
+**Docker Desktop não está rodando / erro de conexão com o daemon**
+Abra o Docker Desktop e espere o ícone indicar que ele está pronto antes de rodar `docker compose up`.
+
+**Porta 8000, 5173 ou 9000 já em uso**
+Outro processo (ex.: um `php artisan serve` esquecido rodando) está usando a porta. Pare o processo local ou ajuste a porta no `docker-compose.yml`.
+
+**Arquivos criados pelo container aparecem com outro dono/permissão no host (comum no Linux/WSL; raro no Docker Desktop para Mac)**
+O `Dockerfile` aceita `HOST_UID`/`HOST_GID` como variáveis de ambiente para casar o usuário `www-data` do container com o seu usuário no host. Defina-as antes do build se precisar:
+
+```bash
+HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose up -d --build
+```
+
+**`Vite manifest not found` ou tela sem estilo**
+Confirme que o container `node` está de pé (`docker compose ps`) e rodando o Vite (`docker compose logs node`).
+
+**Erro de banco de dados ou tabela inexistente**
+Aplique as migrations manualmente:
+
+```bash
+docker compose exec app php artisan migrate
+```
+
+---
+
+## Observações
+
+- O arquivo **`.env` não é versionado** — cada pessoa tem o seu, criado automaticamente pelo `docker/entrypoint.sh` na primeira subida. Ele guarda configurações locais e a chave da aplicação.
+- O banco **`database/database.sqlite` também não é versionado**: cada um tem o seu banco local, com os próprios dados de teste.
+- Nesta etapa o banco é local (dentro do container/bind mount). Em uma etapa seguinte do projeto ele passará a ser hospedado na nuvem.
+
+---
+
+## Alternativa sem Docker
+
+<details>
+<summary>Rodar o projeto nativamente, sem Docker (PHP + Composer + Node na máquina)</summary>
 
 É preciso ter **PHP 8.3+**, **Composer** e **Node.js 20+**.
+
+### Linux
+
+Instale o PHP + Composer com o script oficial (detecta a distro):
+
+```bash
+/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
+```
+
+Depois instale o Node.js 20+ — a versão empacotada pela distro costuma estar desatualizada, então é melhor usar o [nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 20
+```
+
+**Abra um terminal novo** (ou rode `source ~/.bashrc`/`source ~/.zshrc`) antes de continuar.
+
+### macOS
+
+Instale o PHP + Composer com o script oficial:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
+```
+
+Depois instale o Node.js 20+, com [Homebrew](https://brew.sh/) ou [nvm](https://github.com/nvm-sh/nvm):
+
+```bash
+brew install node@20
+```
 
 ### Windows
 
@@ -52,9 +211,9 @@ winget install OpenJS.NodeJS.LTS
 
 **Feche e abra o terminal novamente** — os instaladores alteram o PATH, e os comandos só funcionam em um terminal novo.
 
-Confira se está tudo no lugar:
+### Em qualquer sistema, confira se está tudo no lugar
 
-```powershell
+```bash
 php -v
 composer -V
 node -v
@@ -91,8 +250,7 @@ O Composer precisa ser instalado à parte, seguindo as instruções em <https://
 
 </details>
 
-
-## 2. Clonar e configurar o projeto
+Clone e configure:
 
 ```bash
 git clone https://github.com/MarceloMaciel/projeto-integrador-grupo-6-2026-2.git
@@ -109,76 +267,19 @@ Esse único comando faz toda a configuração:
 5. cria o usuário de acesso ao sistema;
 6. instala as dependências do Node e compila o CSS/JS.
 
----
-
-## 3. Rodar a aplicação
+Depois, para rodar:
 
 ```bash
 php artisan serve
 ```
 
-Acesse **<http://localhost:8000>**.
+Acesse <http://localhost:8000> com as mesmas credenciais da seção 3. Se for editar CSS ou
+JavaScript, deixe o Vite rodando em um segundo terminal (`npm run dev`).
 
-Entre com as credenciais criadas pelo `composer run setup`:
+**Problemas comuns deste caminho:**
 
-| Campo | Valor |
-| --- | --- |
-| E-mail | `proprietaria@restaurante.test` |
-| Senha | `senha1234` |
+- **`php`, `composer` ou `npm` não é reconhecido como comando** — feche o terminal e abra um novo (os instaladores alteram o PATH).
+- **`could not find driver` ou erro de extensão ausente** — falta habilitar uma extensão do PHP; veja a seção do winget acima.
+- **`Vite manifest not found`** — rode `npm run build`.
 
-São credenciais **apenas para uso local**, definidas no `.env` (`OWNER_EMAIL` e
-`OWNER_PASSWORD`). Se quiser outras, altere o `.env` e rode `php artisan db:seed`.
-
-### Se for editar CSS ou JavaScript
-
-Deixe o Vite rodando em um **segundo terminal**, para que as alterações sejam recompiladas ao salvar:
-
-```bash
-npm run dev
-```
-
----
-
-## Comandos úteis
-
-| Comando | O que faz |
-| --- | --- |
-| `php artisan serve` | Sobe o servidor local em <http://localhost:8000> |
-| `npm run dev` | Recompila CSS/JS automaticamente ao salvar |
-| `npm run build` | Compila CSS/JS para versão final |
-| `php artisan migrate` | Aplica as migrations pendentes no banco |
-| `php artisan db:seed` | Cria/garante o usuário de acesso ao sistema |
-| `php artisan test` | Roda os testes automatizados |
-| `php artisan route:list` | Lista todas as rotas da aplicação |
-
----
-
-## Problemas comuns
-
-**`php`, `composer` ou `npm` não é reconhecido como comando**
-Feche o terminal e abra um novo. Os instaladores alteram o PATH do sistema, e terminais já abertos continuam com o valor antigo.
-
-**`could not find driver` ou erro de extensão ausente**
-Falta habilitar uma extensão do PHP. Veja a seção de instalação pelo winget acima, que lista as extensões necessárias e como ligá-las no `php.ini`.
-
-**`Vite manifest not found`**
-Os assets não foram compilados. Rode:
-
-```bash
-npm run build
-```
-
-**Erro de banco de dados ou tabela inexistente**
-Aplique as migrations:
-
-```bash
-php artisan migrate
-```
-
----
-
-## Observações
-
-- O arquivo **`.env` não é versionado** — cada pessoa tem o seu, criado automaticamente pelo `composer run setup`. Ele guarda configurações locais e a chave da aplicação.
-- O banco **`database/database.sqlite` também não é versionado**: cada um tem o seu banco local, com os próprios dados de teste.
-- Nesta etapa o banco é local. Em uma etapa seguinte do projeto ele passará a ser hospedado na nuvem.
+</details>
