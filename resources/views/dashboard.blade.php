@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-bold text-xl text-white uppercase tracking-wide leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -27,11 +27,11 @@
 
                 <ul role="list" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     <!-- Módulo Cardápio (Ativo) -->
-                    <li class="bg-white shadow-sm sm:rounded-lg p-5 border border-amber-200 hover:border-amber-400 hover:shadow-md transition flex flex-col justify-between">
+                    <li class="bg-white shadow-sm sm:rounded-lg p-5 border border-brand-200 hover:border-brand-400 hover:shadow-md transition flex flex-col justify-between">
                         <div>
                             <div class="flex items-start justify-between gap-3">
                                 <div class="flex items-center gap-2">
-                                    <div class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                                    <div class="p-2 bg-brand-50 text-brand-700 rounded-lg">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                         </svg>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
                             <span class="text-xs text-gray-500 font-medium">10 categorias cadastradas</span>
-                            <a href="{{ route('menu.index') }}" class="inline-flex items-center gap-1 text-sm font-semibold text-amber-600 hover:text-amber-700 hover:underline">
+                            <a href="{{ route('menu.index') }}" class="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800 hover:underline">
                                 Acessar cardápio
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

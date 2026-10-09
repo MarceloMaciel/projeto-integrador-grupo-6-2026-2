@@ -17,16 +17,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div class="flex flex-col items-center gap-2">
-                <a href="/" class="flex flex-col items-center gap-2 text-gray-700">
-                    <x-application-logo class="w-16 h-16 fill-current text-gray-600" />
-                    <span class="text-lg font-semibold">{{ config('app.name') }}</span>
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-b from-brand-700 to-brand-900">
+            <div class="flex flex-col items-center gap-3">
+                <a href="/" class="rounded-md focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-4 focus:ring-offset-brand-700">
+                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" class="w-56 h-auto">
                 </a>
-                <p class="text-sm text-gray-500">Sistema de geração de notas fiscais</p>
+                <p class="text-sm font-semibold uppercase tracking-widest text-gold-400">Sistema de notas fiscais</p>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-lg overflow-hidden border-2 border-gold-500 sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>

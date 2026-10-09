@@ -2,11 +2,11 @@
     <x-slot name="header">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-gray-900 leading-tight flex items-center gap-2">
+                <h2 class="font-bold text-2xl text-white uppercase tracking-wide leading-tight flex items-center gap-2">
                     <span>🥢</span>
                     <span>Cardápio do Restaurante</span>
                 </h2>
-                <p class="text-sm text-gray-500 mt-1">
+                <p class="text-sm text-brand-100 mt-1">
                     Consulta de pratos, porções, códigos e valores para operação e pedidos.
                 </p>
             </div>
@@ -19,17 +19,17 @@
                 </div>
                 <div class="bg-white border border-gray-200 px-3.5 py-2 rounded-xl shadow-sm text-center">
                     <span class="block text-xs font-medium text-gray-500 uppercase tracking-wider">Pratos/Itens</span>
-                    <span class="text-lg font-bold text-amber-600">{{ $totalProductsCount }}</span>
+                    <span class="text-lg font-bold text-brand-700">{{ $totalProductsCount }}</span>
                 </div>
                 <div class="bg-white border border-gray-200 px-3.5 py-2 rounded-xl shadow-sm text-center">
                     <span class="block text-xs font-medium text-gray-500 uppercase tracking-wider">Porções/Preços</span>
-                    <span class="text-lg font-bold text-emerald-600">{{ $totalVariationsCount }}</span>
+                    <span class="text-lg font-bold text-gray-900">{{ $totalVariationsCount }}</span>
                 </div>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-8 bg-gray-50/50 min-h-screen">
+    <div class="py-8 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
             <!-- Search and Filter Controls -->
@@ -48,7 +48,7 @@
                                 name="busca"
                                 value="{{ $searchQuery }}"
                                 placeholder="Buscar por código (ex: 99, 38, OV), nome do prato ou ingrediente..."
-                                class="w-full pl-10 pr-4 py-2.5 rounded-xl border-gray-300 focus:border-amber-500 focus:ring-amber-500 text-sm shadow-sm transition placeholder-gray-400"
+                                class="w-full pl-10 pr-4 py-2.5 rounded-xl border-gray-300 focus:border-brand-600 focus:ring-brand-600 text-sm shadow-sm transition placeholder-gray-400"
                             />
                             @if(!empty($searchQuery))
                                 <a href="{{ route('menu.index', ['categoria' => $selectedCategorySlug]) }}" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600" title="Limpar busca">
@@ -65,7 +65,7 @@
                         @endif
 
                         <!-- Submit Button -->
-                        <button type="submit" class="inline-flex items-center justify-center px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold rounded-xl shadow-sm transition duration-150 ease-in-out gap-2 shrink-0">
+                        <button type="submit" class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold rounded-xl shadow-sm transition duration-150 ease-in-out gap-2 shrink-0">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
@@ -90,10 +90,10 @@
                             <!-- All Categories Pill -->
                             <a
                                 href="{{ route('menu.index', ['busca' => $searchQuery]) }}"
-                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition shrink-0 {{ empty($selectedCategorySlug) ? 'bg-amber-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition shrink-0 {{ empty($selectedCategorySlug) ? 'bg-brand-700 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
                             >
                                 Todas
-                                <span class="text-[10px] {{ empty($selectedCategorySlug) ? 'bg-amber-700 text-white' : 'bg-gray-200 text-gray-600' }} px-1.5 py-0.5 rounded-full">
+                                <span class="text-[10px] {{ empty($selectedCategorySlug) ? 'bg-brand-800 text-white' : 'bg-gray-200 text-gray-600' }} px-1.5 py-0.5 rounded-full">
                                     {{ $totalProductsCount }}
                                 </span>
                             </a>
@@ -104,10 +104,10 @@
                                 @endphp
                                 <a
                                     href="{{ route('menu.index', ['categoria' => $category->slug, 'busca' => $searchQuery]) }}"
-                                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition shrink-0 {{ $isSelected ? 'bg-amber-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
+                                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition shrink-0 {{ $isSelected ? 'bg-brand-700 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
                                 >
                                     {{ $category->name }}
-                                    <span class="text-[10px] {{ $isSelected ? 'bg-amber-700 text-white' : 'bg-gray-200 text-gray-600' }} px-1.5 py-0.5 rounded-full">
+                                    <span class="text-[10px] {{ $isSelected ? 'bg-brand-800 text-white' : 'bg-gray-200 text-gray-600' }} px-1.5 py-0.5 rounded-full">
                                         {{ $category->all_products_count ?? $category->products_count }}
                                     </span>
                                 </a>
@@ -119,28 +119,28 @@
 
             <!-- Active Filter Banner (when filter or search active) -->
             @if(!empty($searchQuery) || !empty($selectedCategorySlug))
-                <div class="flex items-center justify-between bg-amber-50/70 border border-amber-200/80 px-4 py-3 rounded-xl text-sm">
-                    <div class="flex items-center gap-2 flex-wrap text-amber-900">
+                <div class="flex items-center justify-between bg-brand-50/70 border border-brand-200/80 px-4 py-3 rounded-xl text-sm">
+                    <div class="flex items-center gap-2 flex-wrap text-brand-900">
                         <span class="font-medium">Filtrando por:</span>
                         @if(!empty($selectedCategorySlug))
                             @php
                                 $currentCat = $categories->firstWhere('slug', $selectedCategorySlug);
                             @endphp
-                            <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-lg border border-amber-200">
+                            <span class="inline-flex items-center gap-1 bg-brand-100 text-brand-800 text-xs font-semibold px-2.5 py-1 rounded-lg border border-brand-200">
                                 Categoria: {{ $currentCat?->name ?? $selectedCategorySlug }}
-                                <a href="{{ route('menu.index', ['busca' => $searchQuery]) }}" class="hover:text-amber-950 font-bold">&times;</a>
+                                <a href="{{ route('menu.index', ['busca' => $searchQuery]) }}" class="hover:text-brand-950 font-bold">&times;</a>
                             </span>
                         @endif
                         @if(!empty($searchQuery))
-                            <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-lg border border-amber-200">
+                            <span class="inline-flex items-center gap-1 bg-brand-100 text-brand-800 text-xs font-semibold px-2.5 py-1 rounded-lg border border-brand-200">
                                 Termo: "{{ $searchQuery }}"
-                                <a href="{{ route('menu.index', ['categoria' => $selectedCategorySlug]) }}" class="hover:text-amber-950 font-bold">&times;</a>
+                                <a href="{{ route('menu.index', ['categoria' => $selectedCategorySlug]) }}" class="hover:text-brand-950 font-bold">&times;</a>
                             </span>
                         @endif
-                        <span class="text-xs text-amber-700">({{ $products->count() }} {{ $products->count() === 1 ? 'item encontrado' : 'itens encontrados' }})</span>
+                        <span class="text-xs text-brand-800">({{ $products->count() }} {{ $products->count() === 1 ? 'item encontrado' : 'itens encontrados' }})</span>
                     </div>
 
-                    <a href="{{ route('menu.index') }}" class="text-xs font-semibold text-amber-800 hover:text-amber-950 underline shrink-0">
+                    <a href="{{ route('menu.index') }}" class="text-xs font-semibold text-brand-800 hover:text-brand-950 underline shrink-0">
                         Ver cardápio completo
                     </a>
                 </div>
@@ -152,7 +152,7 @@
                 <div class="bg-white/90 backdrop-blur border border-gray-200 rounded-xl p-3 shadow-xs sticky top-2 z-10 hidden sm:flex items-center gap-2 overflow-x-auto">
                     <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider shrink-0 mr-1">Ir para:</span>
                     @foreach($categoriesWithProducts as $category)
-                        <a href="#cat-{{ $category->slug }}" class="text-xs font-medium text-gray-600 hover:text-amber-600 hover:bg-amber-50 px-2.5 py-1 rounded-lg transition shrink-0">
+                        <a href="#cat-{{ $category->slug }}" class="text-xs font-medium text-gray-600 hover:text-brand-700 hover:bg-brand-50 px-2.5 py-1 rounded-lg transition shrink-0">
                             {{ $category->name }}
                         </a>
                     @endforeach
@@ -166,23 +166,16 @@
                         @if($categoryProducts->isNotEmpty())
                             <section id="cat-{{ $category->slug }}" class="scroll-mt-20 space-y-4">
                                 <!-- Category Section Header -->
-                                <div class="flex items-center justify-between border-b border-gray-200 pb-3">
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <h3 class="text-xl font-bold text-gray-900 tracking-tight">
-                                                {{ $category->name }}
-                                            </h3>
-                                            <span class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                                                {{ $categoryProducts->count() }} {{ $categoryProducts->count() === 1 ? 'item' : 'itens' }}
-                                            </span>
-                                        </div>
+                                <x-framed-title>{{ $category->name }}</x-framed-title>
+
+                                <div class="flex items-center justify-between gap-3">
+                                    <p class="text-sm text-gray-600">
+                                        <span class="font-semibold text-gray-800">{{ $categoryProducts->count() }} {{ $categoryProducts->count() === 1 ? 'item' : 'itens' }}</span>
                                         @if(!empty($category->description))
-                                            <p class="text-sm text-gray-500 mt-0.5">
-                                                {{ $category->description }}
-                                            </p>
+                                            &middot; {{ $category->description }}
                                         @endif
-                                    </div>
-                                    <a href="{{ route('menu.index', ['categoria' => $category->slug]) }}" class="text-xs font-medium text-amber-600 hover:text-amber-700 hover:underline">
+                                    </p>
+                                    <a href="{{ route('menu.index', ['categoria' => $category->slug]) }}" class="shrink-0 text-xs font-medium text-brand-700 hover:text-brand-800 hover:underline">
                                         Filtrar categoria &rarr;
                                     </a>
                                 </div>
@@ -202,7 +195,7 @@
                 <!-- Filtered / Search Results Grid -->
                 @if($products->isEmpty())
                     <div class="bg-white rounded-2xl p-12 text-center border border-gray-200 shadow-sm space-y-4 max-w-md mx-auto">
-                        <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+                        <div class="w-16 h-16 bg-brand-50 text-brand-700 rounded-full flex items-center justify-center mx-auto text-2xl">
                             🔍
                         </div>
                         <h3 class="text-lg font-bold text-gray-900">Nenhum item encontrado</h3>
@@ -210,7 +203,7 @@
                             Não encontramos nenhum prato correspondente aos filtros selecionados. Tente buscar por outro código, nome ou ingrediente.
                         </p>
                         <div class="pt-2">
-                            <a href="{{ route('menu.index') }}" class="inline-flex items-center px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold rounded-xl shadow-sm transition">
+                            <a href="{{ route('menu.index') }}" class="inline-flex items-center px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold rounded-xl shadow-sm transition">
                                 Ver todo o cardápio
                             </a>
                         </div>
