@@ -18,7 +18,15 @@ class NfceXmlBuilderTest extends TestCase
         parent::setUp();
 
         $this->certificatePath = sys_get_temp_dir().'/nfce-test-'.uniqid().'.pfx';
-        config(['fiscal.certificate.path' => $this->certificatePath]);
+        // Os testes não podem depender do emitente configurado no .env de cada máquina.
+        config([
+            'fiscal.certificate.path' => $this->certificatePath,
+            'fiscal.series' => 1,
+            'fiscal.emitter.cnpj' => '11222333000181',
+            'fiscal.emitter.state_registration' => '123456789012',
+            'fiscal.emitter.legal_name' => 'EMPRESA DE TESTE LTDA',
+            'fiscal.emitter.trade_name' => 'EMPRESA DE TESTE',
+        ]);
 
         $this->app->make(TestCertificate::class)->generate('EMPRESA DE TESTE LTDA', '11222333000181');
     }
