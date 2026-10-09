@@ -3,11 +3,15 @@ set -e
 
 cd /var/www/html
 
-# Install PHP dependencies if not already present (bind mount wipes
-# what was installed during image build)
-if [ ! -d vendor ]; then
+# Install PHP dependencies (bind mount wipes what was installed during
+# image build). Re-runs only when composer.lock changed since the last
+# install, so a `git pull` that adds a package doesn't leave vendor/ out
+# of date, while normal restarts skip this slow step.
+lock_hash=$(md5sum composer.lock | cut -d' ' -f1)
+if [ ! -d vendor ] || [ "$(cat vendor/.lock-hash 2>/dev/null)" != "$lock_hash" ]; then
     echo "Installing composer dependencies..."
     composer install --no-interaction --optimize-autoloader
+    echo "$lock_hash" > vendor/.lock-hash
 fi
 
 # Create .env if it doesn't exist
@@ -55,6 +59,10 @@ if [ ! -f storage/.seeded ]; then
     php artisan db:seed --force
     touch storage/.seeded
 fi
+
+# Self-signed certificate used to sign the simulated NFC-e (no-op if it exists)
+php artisan fiscal:test-certificate
+chown -R www-data:www-data storage/app 2>/dev/null || true
 
 echo "Setup complete. Starting php-fpm..."
 exec "$@"

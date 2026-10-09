@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# PHP extensions Laravel needs (pdo_mysql kept in case you switch off sqlite later)
+# PHP extensions Laravel needs (pdo_mysql kept in case you switch off sqlite later).
+# soap is required by nfephp-org/sped-nfe (NFC-e XML).
 RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
@@ -31,7 +32,8 @@ RUN docker-php-ext-install \
     pcntl \
     bcmath \
     gd \
-    zip
+    zip \
+    soap
 
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

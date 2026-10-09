@@ -17,7 +17,12 @@ Esta é a **estrutura inicial** do projeto. O que já está pronto:
 O sistema é de **uso interno**: não existe cadastro público de usuários. O acesso é
 criado pelo *seeder* (ver credenciais no passo 3).
 
-Ainda **não** implementado: cadastro de produtos, lançamento de pedidos e geração da nota fiscal.
+- Cardápio do restaurante no banco, com tela de consulta
+- Base da nota fiscal: geração do XML de uma **NFC-e simulada** (modelo 65), assinado com
+  um certificado de teste e validado contra o XSD oficial. O documento **nunca é enviado à
+  SEFAZ** e não tem validade fiscal.
+
+Ainda **não** implementado: edição do cardápio, lançamento de pedidos e a emissão da nota a partir de um pedido (telas, cupom e PDF).
 
 ## Tecnologias
 
@@ -117,7 +122,8 @@ cada arquivo salvo.
 | `docker compose exec app php artisan test` | Roda os testes automatizados |
 | `docker compose exec app php artisan route:list` | Lista todas as rotas da aplicação |
 | `docker compose exec app php artisan [comando]` | Roda qualquer comando Artisan dentro do container |
-| `docker compose build` | Reconstrói a imagem (depois de mudar o `Dockerfile` ou `composer.json`) |
+| `docker compose up -d --build` | Reconstrói a imagem e religa (depois de mudar o `Dockerfile` ou o `docker/entrypoint.sh`) |
+| `docker compose exec app php artisan fiscal:test-certificate` | Gera o certificado de teste que assina a NFC-e simulada (o container já faz isso ao subir) |
 
 ---
 
