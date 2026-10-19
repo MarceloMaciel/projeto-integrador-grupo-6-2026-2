@@ -27,14 +27,14 @@ class MenuController extends Controller
             ->ordered();
 
         // Filtro por categoria
-        if (!empty($selectedCategorySlug)) {
+        if (! empty($selectedCategorySlug)) {
             $productsQuery->whereHas('categories', function ($q) use ($selectedCategorySlug) {
                 $q->where('slug', $selectedCategorySlug);
             });
         }
 
         // Filtro por busca textual (nome, código ou ingredientes/descrição)
-        if (!empty($searchQuery)) {
+        if (! empty($searchQuery)) {
             $productsQuery->where(function ($q) use ($searchQuery) {
                 $q->where('name', 'like', "%{$searchQuery}%")
                     ->orWhere('code', 'like', "%{$searchQuery}%")

@@ -43,7 +43,7 @@ class ProductVariation extends Model
      */
     public function getFormattedPriceAttribute(): string
     {
-        return 'R$ ' . number_format((float) $this->price, 2, ',', '.');
+        return 'R$ '.number_format((float) $this->price, 2, ',', '.');
     }
 
     /**

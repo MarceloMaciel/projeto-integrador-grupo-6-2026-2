@@ -109,9 +109,9 @@ class Product extends Model
         }
 
         if ($min === $max) {
-            return 'R$ ' . number_format($min, 2, ',', '.');
+            return 'R$ '.number_format($min, 2, ',', '.');
         }
 
-        return 'R$ ' . number_format($min, 2, ',', '.') . ' - R$ ' . number_format($max, 2, ',', '.');
+        return 'R$ '.number_format($min, 2, ',', '.').' - R$ '.number_format($max, 2, ',', '.');
     }
 }
