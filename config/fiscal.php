@@ -49,6 +49,37 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Perfis fiscais dos produtos
+    |--------------------------------------------------------------------------
+    |
+    | Códigos de partida para um restaurante do Simples Nacional em SP, ainda
+    | a validar com o contador. O perfil "prepared" é o padrão das colunas de
+    | `products`; os demais são as bebidas revendidas.
+    |
+    | Bebidas com substituição tributária: CFOP 5405 e CSOSN 500, com CEST.
+    | O CEST depende da embalagem e vem do Anexo IV (segmento 03) do
+    | Convênio ICMS 142/2018. Suco/néctar em lata não consta desse anexo,
+    | por isso é revenda comum, sem ST.
+    |
+    */
+
+    'product_profiles' => [
+        'prepared' => ['ncm' => '21069090', 'cfop' => '5101', 'csosn' => '102', 'cest' => null, 'unit' => 'UN'],
+        // 03.010.01 Refrigerante em embalagem PET
+        'soft_drink_pet' => ['ncm' => '22021000', 'cfop' => '5405', 'csosn' => '500', 'cest' => '0301001', 'unit' => 'UN'],
+        // 03.010.02 Refrigerante em lata
+        'soft_drink_can' => ['ncm' => '22021000', 'cfop' => '5405', 'csosn' => '500', 'cest' => '0301002', 'unit' => 'UN'],
+        // 03.021.00 Cerveja em garrafa de vidro retornável
+        'beer_returnable_bottle' => ['ncm' => '22030000', 'cfop' => '5405', 'csosn' => '500', 'cest' => '0302100', 'unit' => 'UN'],
+        // 03.021.03 Cerveja em lata
+        'beer_can' => ['ncm' => '22030000', 'cfop' => '5405', 'csosn' => '500', 'cest' => '0302103', 'unit' => 'UN'],
+        // 03.005.04 Água mineral em demais embalagens descartáveis
+        'water_bottle' => ['ncm' => '22011000', 'cfop' => '5405', 'csosn' => '500', 'cest' => '0300504', 'unit' => 'UN'],
+        'juice_can' => ['ncm' => '22029900', 'cfop' => '5102', 'csosn' => '102', 'cest' => null, 'unit' => 'UN'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | CSC (Código de Segurança do Contribuinte)
     |--------------------------------------------------------------------------
     |

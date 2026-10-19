@@ -19,6 +19,11 @@ class Product extends Model
         'name',
         'slug',
         'description',
+        'ncm',
+        'cfop',
+        'csosn',
+        'cest',
+        'unit',
         'order',
         'is_active',
     ];
