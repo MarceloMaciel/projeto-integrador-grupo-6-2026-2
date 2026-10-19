@@ -132,6 +132,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Coca-Cola 2L',
+                        'fiscal_profile' => 'soft_drink_pet',
                         'description' => 'Refrigerante Coca-Cola garrafa 2 Litros.',
                         'variations' => [
                             ['name' => '2 Litros', 'price' => 20.00, 'order' => 1],
@@ -140,6 +141,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Refrigerante Sabores 2L',
+                        'fiscal_profile' => 'soft_drink_pet',
                         'description' => 'Guaraná Antarctica, Fanta Laranja, Fanta Uva ou Sprite (garrafa 2 Litros).',
                         'variations' => [
                             ['name' => '2 Litros', 'price' => 18.00, 'order' => 1],
@@ -148,6 +150,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Refrigerante 1L',
+                        'fiscal_profile' => 'soft_drink_pet',
                         'description' => 'Coca-Cola Original ou Guaraná Antarctica garrafa 1 Litro.',
                         'variations' => [
                             ['name' => '1 Litro', 'price' => 15.00, 'order' => 1],
@@ -156,6 +159,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Refrigerante 600ml',
+                        'fiscal_profile' => 'soft_drink_pet',
                         'description' => 'Coca-Cola ou Sprite garrafa de 600ml.',
                         'variations' => [
                             ['name' => '600ml', 'price' => 12.00, 'order' => 1],
@@ -164,6 +168,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Refrigerante Lata 350ml',
+                        'fiscal_profile' => 'soft_drink_can',
                         'description' => 'Coca-Cola, Guaraná Antarctica, Fanta Laranja, Fanta Uva ou Sprite (lata 350ml).',
                         'variations' => [
                             ['name' => 'Lata 350ml', 'price' => 9.00, 'order' => 1],
@@ -172,6 +177,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'H2OH! 500ml',
+                        'fiscal_profile' => 'soft_drink_pet',
                         'description' => 'H2OH nos sabores Limão ou Limoneto (garrafa 500ml).',
                         'variations' => [
                             ['name' => '500ml', 'price' => 9.00, 'order' => 1],
@@ -180,6 +186,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Suco Lata Del Valle',
+                        'fiscal_profile' => 'juice_can',
                         'description' => 'Sabores: Pêssego, Uva, Goiaba, Manga ou Maracujá.',
                         'variations' => [
                             ['name' => 'Lata 290ml', 'price' => 8.00, 'order' => 1],
@@ -188,6 +195,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Cerveja Garrafa 600ml',
+                        'fiscal_profile' => 'beer_returnable_bottle',
                         'description' => 'Original ou Heineken garrafa 600ml.',
                         'variations' => [
                             ['name' => 'Garrafa 600ml', 'price' => 18.00, 'order' => 1],
@@ -196,6 +204,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Cerveja Lata 350ml',
+                        'fiscal_profile' => 'beer_can',
                         'description' => 'Original ou Heineken lata 350ml.',
                         'variations' => [
                             ['name' => 'Lata 350ml', 'price' => 8.00, 'order' => 1],
@@ -204,6 +213,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Água com Gás 500ml',
+                        'fiscal_profile' => 'water_bottle',
                         'description' => 'Água mineral com gás 500ml.',
                         'variations' => [
                             ['name' => '500ml', 'price' => 7.00, 'order' => 1],
@@ -212,6 +222,7 @@ class MenuSeeder extends Seeder
                     [
                         'code' => null,
                         'name' => 'Água Mineral 500ml',
+                        'fiscal_profile' => 'water_bottle',
                         'description' => 'Água mineral sem gás 500ml.',
                         'variations' => [
                             ['name' => '500ml', 'price' => 5.00, 'order' => 1],
@@ -621,8 +632,11 @@ class MenuSeeder extends Seeder
             foreach ($catData['items'] as $itemData) {
                 // Generate a unique slug based on category and name or code
                 $slugBase = $itemData['code']
-                    ? Str::slug($catData['slug'] . '-' . $itemData['code'] . '-' . $itemData['name'])
-                    : Str::slug($catData['slug'] . '-' . $itemData['name']);
+                    ? Str::slug($catData['slug'].'-'.$itemData['code'].'-'.$itemData['name'])
+                    : Str::slug($catData['slug'].'-'.$itemData['name']);
+
+                // Perfil fiscal explícito nas bebidas; o resto é preparado na casa.
+                $fiscalData = config('fiscal.product_profiles.'.($itemData['fiscal_profile'] ?? 'prepared'));
 
                 $product = Product::updateOrCreate(
                     ['slug' => $slugBase],
@@ -631,6 +645,7 @@ class MenuSeeder extends Seeder
                         'code' => $itemData['code'],
                         'name' => $itemData['name'],
                         'description' => $itemData['description'],
+                        ...$fiscalData,
                         'order' => $itemOrder++,
                         'is_active' => true,
                     ]
