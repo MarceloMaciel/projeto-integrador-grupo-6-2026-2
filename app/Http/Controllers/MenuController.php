@@ -18,9 +18,12 @@ class MenuController extends Controller
         $selectedCategorySlug = $request->query('categoria');
         $searchQuery = trim($request->query('busca', ''));
 
+        $showInactive = $request->boolean('inativos');
+
         $categories = Category::active()->ordered()->withCount('allProducts')->get();
 
-        $productsQuery = Product::active()
+        $productsQuery = Product::query()
+            ->when(! $showInactive, fn ($query) => $query->active())
             ->with(['category', 'categories', 'variations' => function ($query) {
                 $query->active()->ordered();
             }])
@@ -56,8 +59,8 @@ class MenuController extends Controller
             $groupedByCategory = true;
             $categoriesWithProducts = Category::active()
                 ->ordered()
-                ->with(['allProducts' => function ($query) {
-                    $query->active()->ordered()->with(['variations' => function ($q) {
+                ->with(['allProducts' => function ($query) use ($showInactive) {
+                    $query->when(! $showInactive, fn ($q) => $q->active())->ordered()->with(['variations' => function ($q) {
                         $q->active()->ordered();
                     }]);
                 }])
@@ -75,6 +78,7 @@ class MenuController extends Controller
             'categoriesWithProducts' => $categoriesWithProducts,
             'selectedCategorySlug' => $selectedCategorySlug,
             'searchQuery' => $searchQuery,
+            'showInactive' => $showInactive,
             'totalCategoriesCount' => $totalCategoriesCount,
             'totalProductsCount' => $totalProductsCount,
             'totalVariationsCount' => $totalVariationsCount,

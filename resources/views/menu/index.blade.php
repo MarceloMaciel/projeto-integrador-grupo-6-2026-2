@@ -32,6 +32,21 @@
     <div class="py-8 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
+            @if (session('status'))
+                <div role="status" class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm rounded-xl px-4 py-3">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <div class="flex flex-wrap items-center justify-end gap-3">
+                <a href="{{ route('menu.index', array_filter(['inativos' => $showInactive ? null : 1, 'categoria' => $selectedCategorySlug, 'busca' => $searchQuery])) }}" class="text-sm font-medium text-brand-700 hover:text-brand-800 hover:underline">
+                    {{ $showInactive ? 'Ocultar inativos' : 'Mostrar inativos' }}
+                </a>
+                <a href="{{ route('menu.products.create') }}" class="inline-flex items-center px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold rounded-xl shadow-sm transition">
+                    Novo produto
+                </a>
+            </div>
+
             <!-- Search and Filter Controls -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200/80">
                 <form method="GET" action="{{ route('menu.index') }}" class="space-y-4">
@@ -62,6 +77,9 @@
                         <!-- Maintain Category Selection when Submitting Search -->
                         @if(!empty($selectedCategorySlug))
                             <input type="hidden" name="categoria" value="{{ $selectedCategorySlug }}">
+                        @endif
+                        @if($showInactive)
+                            <input type="hidden" name="inativos" value="1">
                         @endif
 
                         <!-- Submit Button -->
