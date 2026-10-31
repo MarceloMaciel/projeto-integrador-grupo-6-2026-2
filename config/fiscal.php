@@ -80,6 +80,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Formas de pagamento
+    |--------------------------------------------------------------------------
+    |
+    | Chave: código tPag da NFC-e. Dinheiro é a única forma com troco. As
+    | opções de partida ainda dependem do que o restaurante aceita.
+    |
+    */
+
+    'cash_payment_method' => '01',
+
+    'payment_methods' => [
+        '01' => 'Dinheiro',
+        '03' => 'Cartão de crédito',
+        '04' => 'Cartão de débito',
+        '17' => 'PIX',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | CSC (Código de Segurança do Contribuinte)
     |--------------------------------------------------------------------------
     |

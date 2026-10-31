@@ -13,6 +13,12 @@
                     </span>
                 @endif
 
+                @unless($product->is_active)
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-semibold bg-red-50 text-red-800 border border-red-200">
+                        Inativo
+                    </span>
+                @endunless
+
                 @foreach($product->categories as $cat)
                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-700">
                         {{ $cat->name }}
@@ -59,6 +65,12 @@
                     </span>
                 </div>
             @endforeach
+        </div>
+
+        <div class="mt-3 text-right">
+            <a href="{{ route('menu.products.edit', $product) }}" aria-label="Editar {{ $product->name }}" class="text-xs font-semibold text-brand-700 hover:text-brand-800 hover:underline">
+                Editar
+            </a>
         </div>
     </div>
 </div>

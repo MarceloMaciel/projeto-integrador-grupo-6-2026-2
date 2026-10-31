@@ -58,27 +58,32 @@
                     </li>
 
                     <!-- Módulo Novo Pedido -->
-                    <li class="bg-white shadow-sm sm:rounded-lg p-5 border border-gray-100 flex flex-col justify-between">
+                    <li class="bg-white shadow-sm sm:rounded-lg p-5 border border-brand-200 hover:border-brand-400 hover:shadow-md transition flex flex-col justify-between">
                         <div>
                             <div class="flex items-start justify-between gap-3">
                                 <div class="flex items-center gap-2">
-                                    <div class="p-2 bg-gray-50 text-gray-500 rounded-lg">
+                                    <div class="p-2 bg-brand-50 text-brand-700 rounded-lg">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
                                     </div>
                                     <h4 class="font-semibold text-gray-900 text-base">Novo pedido</h4>
                                 </div>
-                                <span class="shrink-0 text-xs font-medium text-gray-600 bg-gray-100 rounded-full px-2 py-1">
-                                    Em desenvolvimento
+                                <span class="shrink-0 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1">
+                                    Disponível
                                 </span>
                             </div>
                             <p class="mt-3 text-sm text-gray-600">
                                 Montagem da comanda com os itens consumidos, porções e cálculo automático do total.
                             </p>
                         </div>
-                        <div class="mt-5 pt-4 border-t border-gray-100">
-                            <span class="text-xs text-gray-400">Em breve</span>
+                        <div class="mt-5 pt-4 border-t border-gray-100 flex justify-end">
+                            <a href="{{ route('orders.create') }}" class="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800 hover:underline">
+                                Criar pedido
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
                     </li>
 
