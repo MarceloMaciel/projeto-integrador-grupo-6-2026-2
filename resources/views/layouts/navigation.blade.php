@@ -19,6 +19,9 @@
                     <x-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.*')">
                         {{ __('Cardápio') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.*')">
+                        Novo pedido
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -76,6 +79,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.*')">
                 {{ __('Cardápio') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.*')">
+                Novo pedido
             </x-responsive-nav-link>
         </div>
 
