@@ -69,7 +69,7 @@
 
         <div class="mt-3 text-right">
             <a href="{{ route('menu.products.edit', $product) }}" aria-label="Editar {{ $product->name }}" class="text-xs font-semibold text-brand-700 hover:text-brand-800 hover:underline">
-                Editar
+                Editar produto e preços
             </a>
         </div>
     </div>

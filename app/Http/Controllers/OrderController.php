@@ -11,6 +11,11 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
+    public function index(): View
+    {
+        return view('orders.index', ['orders' => Order::with('invoice')->latest('id')->paginate(20)]);
+    }
+
     /**
      * Exibe a montagem do pedido com os produtos e variações ativos.
      */
@@ -60,6 +65,6 @@ class OrderController extends Controller
 
     public function show(Order $order): View
     {
-        return view('orders.show', ['order' => $order->load('items')]);
+        return view('orders.show', ['order' => $order->load(['items', 'invoice'])]);
     }
 }

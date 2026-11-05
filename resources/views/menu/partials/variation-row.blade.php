@@ -11,7 +11,7 @@
 
     <div>
         <x-input-label for="variation-{{ $index }}-price" value="Preço (R$)" />
-        <x-text-input id="variation-{{ $index }}-price" name="variations[{{ $index }}][price]" type="number" min="0.01" step="0.01" required class="mt-1 block w-full" :value="$row['price']" aria-describedby="variation-{{ $index }}-price-error" />
+        <x-text-input id="variation-{{ $index }}-price" name="variations[{{ $index }}][price]" type="text" inputmode="decimal" placeholder="38,50" required class="mt-1 block w-full" :value="$row['price']" aria-describedby="variation-{{ $index }}-price-error" />
         <x-input-error id="variation-{{ $index }}-price-error" class="mt-2" :messages="$errors->get('variations.'.$index.'.price')" />
     </div>
 

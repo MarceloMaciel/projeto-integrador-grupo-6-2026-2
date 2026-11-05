@@ -19,8 +19,11 @@
                     <x-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.*')">
                         {{ __('Cardápio') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.*')">
+                    <x-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.create')">
                         Novo pedido
+                    </x-nav-link>
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*') && ! request()->routeIs('orders.create')">
+                        Pedidos e notas
                     </x-nav-link>
                 </div>
             </div>
@@ -80,8 +83,11 @@
             <x-responsive-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.*')">
                 {{ __('Cardápio') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.*')">
+            <x-responsive-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.create')">
                 Novo pedido
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*') && ! request()->routeIs('orders.create')">
+                Pedidos e notas
             </x-responsive-nav-link>
         </div>
 

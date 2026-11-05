@@ -17,12 +17,57 @@ Esta é a **estrutura inicial** do projeto. O que já está pronto:
 O sistema é de **uso interno**: não existe cadastro público de usuários. O acesso é
 criado pelo *seeder* (ver credenciais no passo 3).
 
-- Cardápio do restaurante no banco, com tela de consulta
+- Cardápio do restaurante no banco, com consulta, cadastro de produtos e edição de preços por porção
 - Base da nota fiscal: geração do XML de uma **NFC-e simulada** (modelo 65), assinado com
   um certificado de teste e validado contra o XSD oficial. O documento **nunca é enviado à
   SEFAZ** e não tem validade fiscal.
 
-Ainda **não** implementado: edição do cardápio, lançamento de pedidos e a emissão da nota a partir de um pedido (telas, cupom e PDF).
+- Pedidos com fechamento, pagamento e CPF opcional do consumidor
+- Geração da NFC-e simulada a partir do pedido, histórico, download do XML e comprovante para impressão ou salvamento em PDF pelo navegador
+
+Ainda **não** implementado: emissão real com autorização da SEFAZ e PDF gerado no servidor.
+
+### Gerar uma nota a partir do pedido
+
+1. Acesse **Novo pedido**, escolha os itens, informe o pagamento e o CPF na nota, se solicitado, e feche o pedido.
+2. Na tela do pedido, clique em **Gerar NFC-e simulada**.
+3. Use **Baixar XML** ou **Imprimir / salvar PDF**. Para PDF, selecione **Salvar como PDF** na janela de impressão do navegador.
+4. Para consultar novamente, acesse **Pedidos e notas** no menu e abra o pedido.
+
+A nota usa os preços e dados fiscais copiados no fechamento do pedido. O XML e os dados do comprovante são preservados no banco; repetir a geração devolve a mesma nota. A numeração da simulação usa o ID do documento, com uma nota por pedido.
+
+Após atualizar o projeto, rode `docker compose exec app php artisan migrate`.
+O certificado de teste deve existir; se necessário, gere com `docker compose exec app php artisan fiscal:test-certificate`.
+
+O comprovante simulado segue a organização do **Manual de Padrões Técnicos do DANFE-NFC-e e QR Code, versão 6.0 (março/2025)**, seções 3.1 a 3.4: [manual oficial](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=k%2FIuuaW4YiY%3D).
+O layout usa cupom de 80 mm, margens laterais de 2 mm, emitente, código e descrição dos itens, quantidades, unidades, preços, totais, pagamento, troco, chave em blocos de quatro dígitos, consumidor, identificação da nota e QR Code centralizado de 40 mm incluindo margem branca. Os dados e o conteúdo do QR Code são extraídos do **XML salvo**, inclusive a descrição de homologação do primeiro item.
+
+Para imprimir, use escala de **100%**, papel de 80 mm (ou A4) e desative cabeçalhos e rodapés do navegador. O tamanho físico depende dessas opções e da impressora.
+O QR Code é gerado localmente; aponta para a URL de homologação gravada no XML, mas a nota simulada **não está registrada na SEFAZ**. O protocolo de autorização é indicado como inexistente, e o aviso de homologação permanece destacado. O layout é uma demonstração acadêmica, não um DANFE autorizado.
+
+Após atualizar as dependências, execute `docker compose exec app composer install` para disponibilizar a biblioteca de QR Code.
+
+### Dados do restaurante no emitente
+
+Configure no `.env` local as variáveis `FISCAL_CNPJ`, `FISCAL_LEGAL_NAME`, `FISCAL_TRADE_NAME`, `FISCAL_PHONE` e `FISCAL_ADDRESS_*`. Use o código **IBGE** de sete dígitos em `FISCAL_ADDRESS_CITY_CODE` (não o código de município da Receita Federal). Após alterar, rode `docker compose exec app php artisan config:clear`.
+
+Consultas públicas de CNPJ podem fornecer razão social, nome fantasia, endereço e telefone, mas não confirmam necessariamente a **inscrição estadual** nem toda a configuração tributária. Confirme `FISCAL_IE` e `FISCAL_TAX_REGIME` antes de qualquer integração externa. Na simulação local, uma IE fictícia deve ser identificada como tal na configuração.
+
+O cadastro municipal pode ser registrado separadamente em `FISCAL_MUNICIPAL_REGISTRATION`, `FISCAL_MUNICIPAL_CNAE`, `FISCAL_BUSINESS_SIZE` e `FISCAL_LEGAL_NATURE`. O CNAE municipal não substitui automaticamente a atividade principal do cadastro federal. Use `FISCAL_TAX_REGIME=1` para o enquadramento Simples Nacional adotado nesta simulação. `FISCAL_ISS_APPLICABLE=false` registra a informação de não aplicação de ISS fornecida pelo estabelecimento; este campo é apenas cadastral e não é um motor de tributação. A geração atual não inclui serviços nem grupos ISSQN no XML. Inscrição municipal não deve ser preenchida em `FISCAL_IE`.
+
+As alterações do emitente valem para as próximas notas: XML e DANFE já gerados preservam os dados da emissão original. O certificado autoassinado da simulação pode ser recriado para o emitente configurado com `docker compose exec app php artisan fiscal:test-certificate --force`; isso não cria um certificado ICP-Brasil.
+
+**Nota Fiscal Paulista** é o programa de São Paulo, e o documento utilizado neste fluxo é a **NFC-e (modelo 65)**, com CPF quando informado. Esta implementação é acadêmica: não transmite o XML à SEFAZ, não tem autorização de uso, não substitui o documento fiscal de uma venda real e **não gera créditos na Nota Fiscal Paulista**. A emissão real exige uma integração própria com a SEFAZ e as credenciais fiscais do estabelecimento.
+
+### Gerenciar o cardápio
+
+Após entrar no sistema, acesse **Cardápio**:
+
+- Para cadastrar, clique em **Novo produto**, selecione a categoria e preencha o nome, as porções e os preços.
+- Para atualizar preços, clique em **Editar produto e preços** no produto, altere os valores em **Porções e preços** e clique em **Salvar**.
+- Os preços aceitam vírgula ou ponto nos centavos (por exemplo, `38,50` ou `38.50`), sem separador de milhar, e devem ser maiores que zero.
+- Use **Adicionar variação** para cadastrar outras porções. Para um produto sem tamanhos, use uma opção como **Unidade**.
+- Selecione o tipo do produto para preencher os dados fiscais. Para retirar um item de venda, desmarque **Produto ativo**; ele pode ser encontrado pelo filtro **Mostrar inativos**.
 
 ## Tecnologias
 

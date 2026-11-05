@@ -35,6 +35,13 @@ return [
         // 1 = Simples Nacional
         'tax_regime' => (int) env('FISCAL_TAX_REGIME', 1),
         'phone' => env('FISCAL_PHONE'),
+        // Cadastro municipal informado pelo estabelecimento. Não substitui a IE
+        // e não acrescenta serviços/ISSQN ao XML da NFC-e de venda de alimentos.
+        'municipal_registration' => env('FISCAL_MUNICIPAL_REGISTRATION'),
+        'municipal_cnae' => env('FISCAL_MUNICIPAL_CNAE'),
+        'business_size' => env('FISCAL_BUSINESS_SIZE'),
+        'legal_nature' => env('FISCAL_LEGAL_NATURE'),
+        'iss_applicable' => (bool) env('FISCAL_ISS_APPLICABLE', false),
         'address' => [
             'street' => env('FISCAL_ADDRESS_STREET', 'RUA DE EXEMPLO'),
             'number' => env('FISCAL_ADDRESS_NUMBER', '100'),

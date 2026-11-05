@@ -97,18 +97,18 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-base">Notas emitidas</h4>
+                                    <h4 class="font-semibold text-gray-900 text-base">Pedidos e notas</h4>
                                 </div>
                                 <span class="shrink-0 text-xs font-medium text-gray-600 bg-gray-100 rounded-full px-2 py-1">
-                                    Em desenvolvimento
+                                    Simulação disponível
                                 </span>
                             </div>
                             <p class="mt-3 text-sm text-gray-600">
-                                Histórico de pedidos atendidos e emissão de notas fiscais em conformidade.
+                                Histórico dos pedidos, geração de NFC-e simulada e comprovantes sem valor fiscal.
                             </p>
                         </div>
                         <div class="mt-5 pt-4 border-t border-gray-100">
-                            <span class="text-xs text-gray-400">Em breve</span>
+                            <a href="{{ route('orders.index') }}" class="text-sm font-semibold text-brand-700 hover:underline">Consultar pedidos e notas</a>
                         </div>
                     </li>
                 </ul>

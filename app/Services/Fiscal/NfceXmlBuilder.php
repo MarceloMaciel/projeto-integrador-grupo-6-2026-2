@@ -44,6 +44,10 @@ class NfceXmlBuilder
      */
     public function build(array $invoice): string
     {
+        if ($this->config['environment'] !== 2) {
+            throw new RuntimeException('Este gerador permite apenas NFC-e simulada em homologação.');
+        }
+
         $make = new Make;
         $emitter = $this->config['emitter'];
 

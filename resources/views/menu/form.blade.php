@@ -104,9 +104,10 @@
                             Adicionar variação
                         </button>
                     </div>
+                    <p class="text-sm text-gray-600">Informe ao menos uma opção, como Unidade ou Grande, e seu preço. Use vírgula ou ponto para os centavos, sem separador de milhar.</p>
                     <x-input-error :messages="$errors->get('variations')" />
 
-                    <div id="variation-rows" class="space-y-3" data-next-index="{{ count($variationRows) }}">
+                    <div id="variation-rows" class="space-y-3" data-next-index="{{ max(array_keys($variationRows)) + 1 }}">
                         @foreach ($variationRows as $index => $row)
                             @include('menu.partials.variation-row', ['index' => $index, 'row' => $row])
                         @endforeach

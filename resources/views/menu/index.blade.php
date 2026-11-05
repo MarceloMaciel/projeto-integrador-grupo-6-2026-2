@@ -7,7 +7,7 @@
                     <span>Cardápio do Restaurante</span>
                 </h2>
                 <p class="text-sm text-brand-100 mt-1">
-                    Consulta de pratos, porções, códigos e valores para operação e pedidos.
+                    Consulte o cardápio, cadastre produtos e atualize os preços das porções.
                 </p>
             </div>
 

@@ -28,6 +28,18 @@ class ProductRequest extends FormRequest
             'csosn' => $digits('csosn'),
             'cest' => $digits('cest'),
         ]);
+
+        $variations = $this->input('variations');
+        if (is_array($variations)) {
+            foreach ($variations as &$variation) {
+                if (is_array($variation) && isset($variation['price']) && is_string($variation['price'])) {
+                    $variation['price'] = str_replace(',', '.', trim($variation['price']));
+                }
+            }
+            unset($variation);
+
+            $this->merge(['variations' => $variations]);
+        }
     }
 
     public function rules(): array

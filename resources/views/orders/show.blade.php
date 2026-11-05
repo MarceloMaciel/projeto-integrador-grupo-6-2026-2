@@ -16,6 +16,28 @@
                 </div>
             @endif
 
+            @if (session('error'))
+                <div role="alert" class="bg-red-50 border border-red-200 text-red-800 text-sm rounded-xl px-4 py-3">{{ session('error') }}</div>
+            @endif
+            <x-input-error :messages="$errors->get('invoice')" />
+
+            <section class="bg-white shadow-sm sm:rounded-lg p-6 space-y-3" aria-labelledby="nota-pedido">
+                <h3 id="nota-pedido" class="text-lg font-semibold text-gray-900">NFC-e simulada</h3>
+                <p class="text-sm text-gray-600">Sem valor fiscal. Este documento não é transmitido à SEFAZ e não gera créditos na Nota Fiscal Paulista.</p>
+                @if ($order->invoice)
+                    <p class="text-sm text-gray-900">Número {{ $order->invoice->id }} · Série {{ $order->invoice->series }} · Gerada em {{ $order->invoice->issued_at->timezone('America/Sao_Paulo')->format('d/m/Y H:i') }}</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="{{ route('orders.invoice.xml', $order) }}" class="text-sm font-semibold text-brand-700 hover:underline">Baixar XML</a>
+                        <a href="{{ route('orders.invoice.receipt', $order) }}" class="text-sm font-semibold text-brand-700 hover:underline">Imprimir / salvar PDF</a>
+                    </div>
+                @else
+                    <form method="POST" action="{{ route('orders.invoice.store', $order) }}">
+                        @csrf
+                        <x-primary-button>Gerar NFC-e simulada</x-primary-button>
+                    </form>
+                @endif
+            </section>
+
             <section class="bg-white shadow-sm sm:rounded-lg p-6 space-y-4" aria-labelledby="itens-pedido">
                 <h3 id="itens-pedido" class="text-lg font-semibold text-gray-900">Itens</h3>
 
@@ -67,6 +89,7 @@
             <a href="{{ route('orders.create') }}" class="inline-flex items-center px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold rounded-xl shadow-sm transition">
                 Novo pedido
             </a>
+            <a href="{{ route('orders.index') }}" class="inline-flex ms-4 text-sm font-semibold text-brand-700 hover:underline">Histórico de pedidos</a>
         </div>
     </div>
 </x-app-layout>
