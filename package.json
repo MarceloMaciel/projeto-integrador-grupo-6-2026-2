@@ -4,14 +4,19 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "test:e2e": "cypress run",
+        "test:e2e:open": "cypress open"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/vite": "^4.0.0",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
+        "axe-core": "^4.14.0",
         "concurrently": "^10.0.3",
+        "cypress": "^14.5.4",
+        "cypress-axe": "^1.7.0",
         "laravel-vite-plugin": "^3.1",
         "postcss": "^8.4.31",
         "tailwindcss": "^3.1.0",

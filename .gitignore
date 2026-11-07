@@ -32,5 +32,5 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
-# Documento de planejamento interno do grupo (não faz parte do código entregável)
-/docs/brief-projeto.md
+# Documentos de planejamento interno do grupo (não fazem parte do código entregável)
+/docs/brief-*.md
