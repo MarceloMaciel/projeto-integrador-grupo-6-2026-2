@@ -172,6 +172,38 @@ cada arquivo salvo.
 
 ---
 
+## Testes no navegador (Cypress)
+
+Dois testes de ponta a ponta rodam no navegador, contra o sistema já no ar (`docker compose up`):
+
+- **Funcional** (`cypress/e2e/pedido-nota.cy.js`): monta um pedido, gera a NFC-e simulada e confere o comprovante com a tarja de homologação e o histórico.
+- **Não funcional** (`cypress/e2e/acessibilidade.cy.js`): verificação automática de acessibilidade (WCAG 2.1 A e AA, com `cypress-axe`) nas telas de pedido, nota, comprovante, histórico e login; reprova violações graves e críticas.
+
+Rode na máquina, fora do Docker (precisa do Node):
+
+```bash
+npm install --ignore-scripts
+npx cypress install
+npm run test:e2e -- --browser edge
+```
+
+No Windows, o navegador padrão do Cypress (Electron) pode fechar sozinho; por isso o `--browser edge` (ou `chrome`). Para testar o site publicado: `CYPRESS_BASE_URL=https://... npm run test:e2e`. Os testes criam pedidos e notas no banco do endereço testado.
+
+---
+
+## Publicar no Render (site + Postgres)
+
+O deploy usa só o Render, no plano gratuito: o `render.yaml` (Blueprint) cria o site, construído pelo `Dockerfile.render`, e um banco Postgres do próprio Render. O `docker/render-start.sh` aplica as migrations, popula o usuário e o cardápio só no banco vazio, gera o certificado de teste e sobe o servidor.
+
+1. No [painel do Render](https://dashboard.render.com), clique em **New → Blueprint** e escolha este repositório (branch `main`).
+2. Preencha as variáveis pedidas: `APP_KEY` (gere com `docker compose exec app php artisan key:generate --show`) e `OWNER_PASSWORD` (senha forte, diferente da do seeder).
+3. Opcional: para o emitente real na nota, cadastre em **Environment** do serviço as variáveis `FISCAL_*` do seu `.env` local. Sem elas, a nota sai com o emitente fictício. Nunca as coloque no `render.yaml`.
+4. Cada push na `main` publica de novo.
+
+Limites do plano gratuito: o site dorme após uns 15 minutos sem acesso (o primeiro acesso depois disso demora cerca de 1 minuto), e **o Postgres gratuito expira 30 dias depois de criado**. Para tirar do ar, apague o serviço e o banco no painel.
+
+---
+
 ## Problemas comuns
 
 **Docker Desktop não está rodando / erro de conexão com o daemon**
@@ -203,7 +235,7 @@ docker compose exec app php artisan migrate
 
 - O arquivo **`.env` não é versionado** — cada pessoa tem o seu, criado automaticamente pelo `docker/entrypoint.sh` na primeira subida. Ele guarda configurações locais e a chave da aplicação.
 - O banco **`database/database.sqlite` também não é versionado**: cada um tem o seu banco local, com os próprios dados de teste.
-- Nesta etapa o banco é local (dentro do container/bind mount). Em uma etapa seguinte do projeto ele passará a ser hospedado na nuvem.
+- Localmente o banco é SQLite (dentro do container/bind mount). No site publicado, é o Postgres do Render (ver "Publicar no Render").
 
 ---
 

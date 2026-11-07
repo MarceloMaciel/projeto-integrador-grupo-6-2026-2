@@ -12,3 +12,16 @@ storage/framework/views/*
 Dockerfile
 docker-compose.yml
 docker/nginx
+# Imagem do Render: nada da máquina local (Vite em modo dev, banco, certificado, dados internos)
+public/hot
+public/build
+database/*.sqlite
+storage/app/private/*
+storage/.seeded
+cypress
+docs
+doc complementar
+.claude
+.cursor
+AGENTS.md
+CLAUDE.md

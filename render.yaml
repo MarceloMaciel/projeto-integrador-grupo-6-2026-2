@@ -1,0 +1,53 @@
+# Blueprint do Render: o site e o banco Postgres, ambos no plano gratuito.
+# Atenção: o Postgres gratuito do Render expira 30 dias depois de criado.
+# Dados reais do restaurante (FISCAL_*) não entram aqui: cadastre-os no painel do serviço.
+databases:
+  - name: restaurante-db
+    plan: free
+    region: virginia
+    databaseName: restaurante
+    user: restaurante
+
+services:
+  - type: web
+    name: restaurante
+    runtime: docker
+    plan: free
+    region: virginia
+    branch: main
+    dockerfilePath: ./Dockerfile.render
+    dockerContext: .
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: Yakisoba do Dan
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # Gere com: docker compose exec app php artisan key:generate --show
+      - key: APP_KEY
+        sync: false
+      - key: APP_LOCALE
+        value: pt_BR
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: info
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        fromDatabase:
+          name: restaurante-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      # Usuário de acesso criado no primeiro deploy. Use uma senha forte, diferente da do seeder.
+      - key: OWNER_EMAIL
+        value: proprietaria@restaurante.test
+      - key: OWNER_PASSWORD
+        sync: false
