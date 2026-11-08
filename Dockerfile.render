@@ -20,10 +20,10 @@ RUN npm run build
 # 3) Aplicação
 FROM php:8.4-cli
 
-# pdo_pgsql: Postgres do Render. soap: exigido pelo sped-nfe (NFC-e).
+# pdo_pgsql: Postgres do Render. pdo_mysql: MySQL do Azure. soap: exigido pelo sped-nfe (NFC-e).
 RUN apt-get update && apt-get install -y --no-install-recommends \
         unzip libpng-dev libonig-dev libxml2-dev libzip-dev libpq-dev \
-    && docker-php-ext-install pdo_pgsql mbstring bcmath gd zip soap \
+    && docker-php-ext-install pdo_mysql pdo_pgsql mbstring bcmath gd zip soap \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
